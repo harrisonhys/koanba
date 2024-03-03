@@ -6,6 +6,8 @@ import com.domain.models.mappers.CustomerMapper;
 import com.domain.repositories.CustomerRepository;
 import com.domain.services.CustomerService;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
