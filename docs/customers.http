@@ -1,0 +1,31 @@
+@URL = http://localhost:8080
+### GET ALL CUSTOMER ###
+GET {{URL}}/customers
+Accept: application/json
+
+### GET DETAIL CUSTOMER ###
+GET {{URL}}/customers/detail/0c4f3e35-e9a5-4d77-be03-4d9a24ddda52
+Accept: application/json
+
+### POST CUSTOMER ###
+POST {{URL}}/customers
+Accept: application/json
+Content-Type: application/json
+
+{
+    "customerName": "Harianto 2",
+    "address" : "Jl Nakula Sadewa 2",
+    "phone" : 5734929
+}
+
+
+### EDIT CUSTOMERS ###
+PUT {{URL}}/customers/cb437b3e-ea5d-4ffe-911d-5249cab62a41
+Accept: application/json
+Content-Type: application/json
+
+{
+    "customerName": "Harianto 3",
+    "address" : "Jl Nakula Sadewa 3",
+    "phone" : 5734929
+}
