@@ -6,10 +6,12 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Data // to generate setter and getter
-@AllArgsConstructor //to add constructor with all parameter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name="`order`")
 public class Order {
     @Id
@@ -25,4 +27,9 @@ public class Order {
     @JoinColumn(name="product_id")
     private Product productId;
     private LocalDateTime orderDate; 
+    
+    @PrePersist
+    public void prePersist() {
+        this.orderDate = LocalDateTime.now();
+    }
 }
