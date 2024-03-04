@@ -4,7 +4,7 @@ GET {{URL}}/customers
 Accept: application/json
 
 ### GET DETAIL CUSTOMER ###
-GET {{URL}}/customers/detail/0c4f3e35-e9a5-4d77-be03-4d9a24ddda52
+GET {{URL}}/customers/0c4f3e35-e9a5-4d77-be03-4d9a24ddda52
 Accept: application/json
 
 ### POST CUSTOMER ###

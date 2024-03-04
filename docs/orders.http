@@ -1,0 +1,23 @@
+@URL = http://localhost:8080/orders
+### GET ORDERS ###
+GET {{URL}}
+Accept: application/json
+
+### GET DETAIL ORDER ###
+GET {{URL}}/ed01ff56-169f-4335-a439-0321488dfe9f
+Accept: application/json
+
+### POST ORDER ###
+POST {{URL}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "customerId": "0c4f3e35-e9a5-4d77-be03-4d9a24ddda52",
+    "productId" : "3b92ad52-6d1b-40fe-b5bb-fd5efa4fece2",
+    "quantity" : 2
+}
+
+### DELETE ORDER ###
+DELETE {{URL}}/80358fa1-bbf6-4b13-afe0-1a5f15f4993a
+Accept: application/json

@@ -1,0 +1,31 @@
+@URL = http://localhost:8080/products
+### GET ALL PRODUCTS ###
+GET {{URL}}
+Accept: application/json
+
+### GET DETAIL PRODUCT ###
+GET {{URL}}/04ceb000-ccb2-4d64-a695-dc1c1224161f
+Accept: application/json
+
+### POST PRODUCT ###
+POST {{URL}}
+Accept: application/json
+Content-Type: application/json
+
+{
+    "productDescription": "Nintendo Switch",
+    "productPrice" : 7300000,
+    "stock" : 11
+}
+
+### EDIT PRODUCTS ###
+PUT {{URL}}/3b92ad52-6d1b-40fe-b5bb-fd5efa4fece2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "productId": "04ceb000-ccb2-4d64-a695-dc1c1224161f",
+  "productPrice": "7000000",
+  "productDescription": "Kulkas LG Dua Pintu Inverter",
+  "stock": 10
+}
