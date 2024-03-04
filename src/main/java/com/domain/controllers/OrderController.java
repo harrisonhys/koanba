@@ -50,10 +50,10 @@ public class OrderController {
                 return ResponseEntity.status(HttpStatus.CREATED).body(successOrderMsg);
             }else{
                 ErrorMessage orderFailedMsg = new ErrorMessage("Order Failed");
-                return ResponseEntity.status(HttpStatus.CREATED).body(orderFailedMsg);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(orderFailedMsg);
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
 
         

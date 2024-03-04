@@ -1,7 +1,7 @@
 package com.domain.services.impl;
 
-import com.domain.helper.ErrorMessage;
 import com.domain.helper.NotFoundException;
+import com.domain.helper.BadRequestException;
 import com.domain.models.dtos.CustomerDto;
 import com.domain.models.dtos.OrderDto;
 import com.domain.models.dtos.ProductDto;
@@ -16,8 +16,6 @@ import com.domain.services.OrderService;
 import com.domain.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,7 +69,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         if(productDto.getStock() < orderDto.getQuantity()) {
-            throw new NotFoundException("Empty Stock");
+            throw new BadRequestException("Empty Stock");
         }
 
         Order order         = orderMapper.toEntity(orderDto);
