@@ -23,11 +23,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerMapper customerMapper;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, CustomerMapper customerMapper) {
-        this.customerRepository = customerRepository;
-        this.customerMapper = customerMapper;
-    }
-
     @Override
     public CustomerDto getCustomer(String param) {
         Optional<Customer> customer = customerRepository.findByCustomerName(param);

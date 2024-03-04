@@ -1,5 +1,7 @@
 package com.domain.services.impl;
 
+import com.domain.helper.ErrorMessage;
+import com.domain.helper.NotFoundException;
 import com.domain.models.dtos.CustomerDto;
 import com.domain.models.dtos.OrderDto;
 import com.domain.models.dtos.ProductDto;
@@ -9,8 +11,13 @@ import com.domain.models.mappers.OrderMapper;
 import com.domain.models.mappers.ProductMapper;
 import com.domain.repositories.OrderRepository;
 import com.domain.repositories.ProductRepository;
+import com.domain.services.CustomerService;
 import com.domain.services.OrderService;
+import com.domain.services.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,22 +27,19 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    @Autowired
-    private final OrderRepository orderRepository;
-    @Autowired
-    private final OrderMapper orderMapper;
-    @Autowired
-    private final ProductMapper productMapper;
-    @Autowired
-    private final ProductRepository productRepository;
-    
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper, ProductRepository productRepository, ProductMapper productMapper) {
-        this.orderRepository = orderRepository;
-        this.orderMapper = orderMapper;
-        this.productRepository = productRepository;
-        this.productMapper = productMapper;
-    }
+    @Autowired
+    private OrderRepository orderRepository;
+    @Autowired
+    private OrderMapper orderMapper;
+    @Autowired
+    private ProductMapper productMapper;
+    @Autowired
+    private ProductRepository productRepository;
+    @Autowired
+    private ProductService productService;
+    @Autowired
+    private CustomerService customerService;
 
     @Override
     public OrderDto getOrderById(String orderId) {
@@ -53,7 +57,23 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional
-    public OrderDto createOrder(OrderDto orderDto, ProductDto productDto, CustomerDto customerDto) {
+    public OrderDto createOrder(OrderDto orderDto) {
+        ProductDto productDto = productService.getProductById(orderDto.getProductId());
+
+        if (productDto == null) {
+            throw new NotFoundException("Product not found");
+        }
+
+        CustomerDto customerDto = customerService.getCustomerById(orderDto.getCustomerId());
+
+        if (customerDto == null) {
+            throw new NotFoundException("Customer not found");
+        }
+
+        if(productDto.getStock() < orderDto.getQuantity()) {
+            throw new NotFoundException("Empty Stock");
+        }
+
         Order order         = orderMapper.toEntity(orderDto);
         Integer quantity    = order.getQuantity();
         BigDecimal price    = new BigDecimal(productDto.getProductPrice());
@@ -67,6 +87,7 @@ public class OrderServiceImpl implements OrderService {
         product.setStock(finalStock);
         productRepository.save(product);
         Order savedOrder = orderRepository.save(order);
+        
         return orderMapper.toDto(savedOrder);
     }
 

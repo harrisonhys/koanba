@@ -15,7 +15,7 @@ Content-Type: application/json
 {
     "customerId": "0c4f3e35-e9a5-4d77-be03-4d9a24ddda52",
     "productId" : "3b92ad52-6d1b-40fe-b5bb-fd5efa4fece2",
-    "quantity" : 2
+    "quantity" : 20
 }
 
 ### DELETE ORDER ###

@@ -13,8 +13,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "customerName": "Harianto 2",
-    "address" : "Jl Nakula Sadewa 2",
+    "customerName": "Muji",
+    "address" : "Jl Nakula Sadewa 4",
     "phone" : 5734929
 }
 
