@@ -20,7 +20,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/detail/{customerId}")
+    @GetMapping("/{customerId}")
     public ResponseEntity<CustomerDto> getCustomerByCustomerId(@PathVariable String customerId) {
         CustomerDto customerDto = customerService.getCustomerById(customerId);
         if (customerDto != null) {
